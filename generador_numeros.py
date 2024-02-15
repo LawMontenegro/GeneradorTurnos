@@ -19,16 +19,13 @@ def area_cosmetica():
         yield f"C-{turno}"
               
 
+contador_perfumeria = area_perfumeria()
+contador_farmacia = area_farmacia()
+contador_cosmetica = area_cosmetica()
 
 
    
-def elegir_categoria():
-    categoria = "x"
-    while not categoria.isnumeric() or int(categoria) not in range(1, len(lista_categorias) + 1):
-        for item, x in enumerate(lista_categorias):
-            print(f"[{item+1}]-{x} ")
-        categoria = input('')
-    return lista_categorias[int(categoria)-1]
+
 
 def generador_turno(categoria):
 
@@ -70,18 +67,23 @@ def generador_turno(categoria):
     
     volver_inicio()
     
-
-
-
 def decorador_servicio(funcion_generadora):
-    def envoltura():
+    
+        print("\n"+"*"*25)
         print("Su turno es:")
-        generador = funcion_generadora()
-        for elemento in generador:
-            yield elemento
+        
+        
+        if funcion_generadora == "P":
+            print(next(contador_perfumeria))
+        elif funcion_generadora == "F":
+            print(next(contador_farmacia))
+        else:
+            print(next(contador_cosmetica))
+            
+            
         print("Por favor, espere a ser atendido.") 
         
-    return envoltura
+    
 
 def memoria_generador(generator_func):
     generator = generator_func()
@@ -97,24 +99,9 @@ def memoria_generador(generator_func):
             generator = generator_func()
             memo = None
 
-def volver_inicio():
-    print("¿Desea solicitar otro turno? (s/n)")
-    opc = input('').lower()
-    if opc == 's':
-        categoria_seleccionada = elegir_categoria()
-        generador_turno(categoria_seleccionada)
-    if opc == 'n':
-        print("¡Gracias por visitar Drogeria Esquina!")
 
-def bienvenida():
-    print("Bienvenida a la Drogeria Esquinera")
-    print("¿Qué área desea atender? \n")
 
 
 
 
   
-    
-bienvenida()
-categoria_seleccionada = elegir_categoria()
-generador_turno(categoria_seleccionada)
