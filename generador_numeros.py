@@ -3,9 +3,6 @@ Codigo para generar numeros de turnos dentro de una  farmacia
 
 '''
 
-
-lista_categorias = ["Perfumeria", "Farmacia", "Cosmeticos"]
-
 def area_perfumeria():
     for turno in range(1,10000):
         yield f"P-{turno}"
@@ -53,6 +50,7 @@ def generador_turno(categoria):
         while num < 101:
             yield num
             num += 1
+            
     
     if categoria == "Perfumeria":
         
@@ -65,7 +63,6 @@ def generador_turno(categoria):
     elif categoria == "Cosmeticos":
         print(f"C-{next(generador_cosmetica)}")
     
-    volver_inicio()
     
 def decorador_servicio(funcion_generadora):
     
